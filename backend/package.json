@@ -1,0 +1,25 @@
+{
+  "name": "piggy-blinder-server",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r tsconfig-paths/register src/server.ts"
+  },
+  "keywords": [
+    "expense tracker"
+  ],
+  "author": "Thatchapon Chatthanes",
+  "license": "ISC",
+  "description": "Expense tracker application",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.7.2"
+  }
+}
