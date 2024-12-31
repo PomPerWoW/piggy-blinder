@@ -8,4 +8,15 @@ export default [
   { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    rules: {
+      'no-unused-vars': 'error',
+      'no-undef': 'error',
+      'prefer-const': 'error',
+      'no-console': 'warn',
+    },
+  },
+  {
+    ignores: ['dist', 'node_modules'],
+  },
 ];
