@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "pm2 start dist/src/server.js",
+    "stop": "pm2 stop all",
+    "delete": "pm2 delete all",
     "dev": "nodemon -r tsconfig-paths/register src/server.ts",
+    "build": "rm -rf dist/ && tsc -p .",
     "lint": "eslint . ",
     "lint:fix": "eslint . --fix "
   },
