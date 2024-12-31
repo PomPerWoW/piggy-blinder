@@ -1,22 +1,62 @@
-import globals from 'globals';
-import pluginJs from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import js from '@eslint/js';
+import { FlatCompat } from '@eslint/eslintrc';
 
-/** @type {import('eslint').Linter.Config[]} */
+const compat = new FlatCompat({
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
+
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts}'] },
-  { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...fixupConfigRules(
+    compat.extends(
+      'eslint:recommended',
+      'plugin:@typescript-eslint/recommended',
+      'plugin:import/recommended',
+      'plugin:import/typescript'
+    )
+  ),
   {
-    rules: {
-      'no-unused-vars': 'error',
-      'no-undef': 'error',
-      'prefer-const': 'error',
-      'no-console': 'warn',
+    plugins: {
+      '@typescript-eslint': fixupPluginRules(typescriptEslint),
     },
-  },
-  {
-    ignores: ['dist', 'node_modules'],
+
+    languageOptions: {
+      parser: tsParser,
+      ecmaVersion: 2020,
+      sourceType: 'module',
+    },
+
+    rules: {
+      'no-multiple-empty-lines': [
+        2,
+        {
+          max: 2,
+        },
+      ],
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'import/no-unresolved': 0,
+      'import/order': [
+        'warn',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'type',
+            'object',
+          ],
+          'newlines-between': 'always',
+        },
+      ],
+    },
+    ignores: ['.node_modules/*', 'dist'],
   },
 ];
