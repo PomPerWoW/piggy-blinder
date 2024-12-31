@@ -30,6 +30,8 @@ export default [
     },
 
     rules: {
+      'no-unused-vars': 'error',
+      'no-console': 'warn',
       'no-multiple-empty-lines': [
         2,
         {
