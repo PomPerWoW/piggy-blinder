@@ -1,4 +1,4 @@
-import Logger from '@piggy/infrastructure/logging/logger';
+import Logger from '@piggy/core/logging/logger';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 

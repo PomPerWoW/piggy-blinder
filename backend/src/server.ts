@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
-import config from '@piggy/infrastructure/config/config';
-import Logger from '@piggy/infrastructure/logging/logger';
+import config from '@piggy/core/config/config';
+import Logger from '@piggy/core/logging/logger';
 import { healthRoutes } from '@piggy/interfaces/routes/health';
 
 const PORT = config.SERVER_PORT;
