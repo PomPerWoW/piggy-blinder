@@ -1,7 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+class Prisma {
+  private static instance: PrismaClient;
 
-export const prisma = globalForPrisma.prisma || new PrismaClient();
+  private constructor() {}
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+  public static getInstance(): PrismaClient {
+    if (!Prisma.instance) {
+      Prisma.instance = new PrismaClient({ errorFormat: 'pretty' });
+    }
+    return Prisma.instance;
+  }
+}
+
+export default Prisma;
