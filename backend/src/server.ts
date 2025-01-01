@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import config from '@piggy/core/config/config';
 import Logger from '@piggy/core/logging/logger';
-import { healthRoutes } from '@piggy/interfaces/routes/health';
+import { healthRoutes } from '@piggy/presentation/routes/health';
 
 const PORT = config.SERVER_PORT;
 const logger: Logger = new Logger('Server');

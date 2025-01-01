@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { HealthController } from '@piggy/interfaces/controllers/health';
+import { HealthController } from '@piggy/presentation/controllers/health';
 
 const router: Router = express.Router();
 

@@ -1,0 +1,21 @@
+services:
+  piggy-blinder-database:
+    container_name: piggy-blinder-database
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: pomper
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: piggy-blinder
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - server
+
+volumes:
+  data:
+
+networks:
+  server:
