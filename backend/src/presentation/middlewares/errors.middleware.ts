@@ -8,7 +8,7 @@ import { Request, Response, NextFunction } from 'express';
 
 const logger: Logger = new Logger('ErrorMiddleware');
 
-export const notFoundHandler = (req: Request, _res: Response, _next: NextFunction) => {
+export const notFoundHandler = (req: Request) => {
 	throw new NotFoundError(`Can't find ${req.method}:${req.originalUrl} on this server!`, 'Server');
 };
 

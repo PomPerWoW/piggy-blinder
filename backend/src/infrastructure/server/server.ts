@@ -5,15 +5,15 @@ import Logger from '@piggy/core/logging/logger';
 import { errorHandler, notFoundHandler } from '@piggy/presentation/middlewares/errors.middleware';
 import { prisma } from '@piggy/infrastructure/adapters/prisma.client';
 import { healthRoutes } from '@piggy/presentation/routes/health.route';
-import config from '@piggy/core/config/config';
+import { shutdownTestRoutes } from '@piggy/presentation/routes/shutdown-test.route';
 
 export class Server {
 	private readonly app: Express;
 	private readonly server: HttpServer;
 	private readonly logger: Logger;
-	private readonly port: string | undefined;
+	private readonly port: string | number;
 
-	constructor(port: string | undefined) {
+	constructor(port: string | number) {
 		this.app = express();
 		this.server = http.createServer(this.app);
 		this.logger = new Logger('Server');
@@ -31,6 +31,7 @@ export class Server {
 
 	private setupRoutes(): void {
 		this.app.use('/api/v1', healthRoutes);
+		this.app.use('/api/v1/shutdown-test', shutdownTestRoutes);
 	}
 
 	private setupErrorHandling(): void {
@@ -95,6 +96,3 @@ export class Server {
 		});
 	}
 }
-
-const server: Server = new Server(config.SERVER_PORT);
-server.start();
