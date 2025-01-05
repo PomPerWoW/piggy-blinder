@@ -21,21 +21,17 @@ export class Server {
 
 		this.setupMiddlewares();
 		this.setupRoutes();
-		this.setupErrorHandling();
 		this.setupShutdownHandlers();
 	}
 
 	private setupMiddlewares(): void {
 		this.app.use(express.json());
+		this.app.all('*', notFoundHandler);
+		this.app.use(errorHandler);
 	}
 
 	private setupRoutes(): void {
 		this.app.use('/api/v1', healthRoutes);
-	}
-
-	private setupErrorHandling(): void {
-		this.app.all('*', notFoundHandler);
-		this.app.use(errorHandler);
 	}
 
 	private setupShutdownHandlers(): void {
